@@ -1,41 +1,37 @@
 <template>
   <li class="gh-list-item">
     <div class="gh-list-item__actions">
-      <button role="duplicate">
-        Duplicate
-      </button>
-      <button role="remove">
-        Remove
-      </button>
+      <button data-testid="duplicateButton" @click="duplicate">Duplicate</button>
+      <button data-testid="removeButton" @click="remove">Remove</button>
     </div>
     <figure class="gh-list-item__profpic">
       <div class="gh-list-item__profpic__inner">
-        <img src="null" alt="profile picture">
+        <img :src="user.avatar_url" alt="profile picture" />
       </div>
     </figure>
     <div>
       <header>
-        <h3 style="margin: 0;">Username</h3>
-        <p style="margin: 0; font-size: 0.8rem;">City, Country</p>
+        <h3 style="margin: 0">{{ user.login }}</h3>
+        <p style="margin: 0; font-size: 0.8rem">{{ user.location }}</p>
       </header>
       <section class="gh-list-item__section-info">
         <p class="gh-list-item__section-info__item">
           <span>Public Repos</span>
-          <span>XXX</span>
+          <span>{{ user.public_repos }}</span>
         </p>
         <p class="gh-list-item__section-info__item">
           <span>Followers</span>
-          <span>YYY</span>
+          <span>{{ user.followers }}</span>
         </p>
         <p class="gh-list-item__section-info__item">
           <span>Following</span>
-          <span>ZZZ</span>
+          <span>{{ user.following }}</span>
         </p>
       </section>
       <section class="gh-list-item__section-info">
         <p class="gh-list-item__section-info__item">
           <span>Registered at</span>
-          <span>Date</span>
+          <span>{{ user.created_at | convert }}</span>
         </p>
       </section>
     </div>
@@ -44,14 +40,37 @@
 
 <script>
 export default {
-
+  props: {
+    user: {
+      type: Object,
+      required: true,
+    },
+  },
+  filters: {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    convert: function (value) {
+      let result = new Date(value)
+      return result.getMonth() + 1 + '-' + result.getDate() + '-' + result.getFullYear()
+    },
+  },
+  methods: {
+    duplicate() {
+      this.$emit('duplicate', { user: this.user })
+    },
+    remove() {
+      this.$emit('remove', { user_id: this.user.id })
+    },
+  },
 }
 </script>
 
 <style lang="scss" scoped>
+.gh-list-item__profpic__inner img {
+  width: 100%;
+}
 .gh-list-item {
   position: relative;
-  list-style-type: none; 
+  list-style-type: none;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -68,7 +87,6 @@ export default {
 
     &__inner {
       position: relative;
-      padding-top: 100%;
     }
 
     > img {
@@ -105,12 +123,12 @@ export default {
     display: flex;
     gap: 0.5rem;
 
-    > button[role="duplicate"] {
+    > button[role='duplicate'] {
       background-color: green;
       color: white;
     }
 
-    > button[role="remove"] {
+    > button[role='remove'] {
       background-color: red;
       color: white;
     }

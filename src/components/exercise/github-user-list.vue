@@ -10,7 +10,7 @@
       <button type="button" @click="clearAll" data-testid="btn-clearall">Clear All</button>
     </header>
     <div>
-      <GithubUserListItem />
+      <GithubUserListItem v-for="user in data" :key="user.id" :user="user" />
     </div>
   </div>
 </template>
