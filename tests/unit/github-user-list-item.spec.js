@@ -64,4 +64,8 @@ describe('Github User List Item', () => {
     const expectedPayload = { user_id: 73375663 }
     expect(wrapper.emitted('remove')[0][0]).toMatchObject(expectedPayload)
   })
+
+  it('renders correctly', () => {
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

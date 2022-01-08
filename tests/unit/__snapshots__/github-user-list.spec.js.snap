@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Github User List renders correctly 1`] = `
+<div style="text-align: left; width: 640px;">
+  <header style="display: flex; justify-content: space-between;">
+    <form class="form"><label for="username"><input id="username" type="text" data-testid="username-input"></label> <button type="submit" data-testid="btn-submit">Add</button></form> <button type="button" data-testid="btn-clearall">Clear All</button>
+  </header>
+  <div></div>
+</div>
+`;

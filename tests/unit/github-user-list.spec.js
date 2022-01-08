@@ -30,4 +30,9 @@ describe('Github User List', () => {
     await btn.trigger('click')
     expect(wrapper.vm.data).toEqual([])
   })
+
+  it('renders correctly', () => {
+    const wrapper = shallowMount(GithubUserList)
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })

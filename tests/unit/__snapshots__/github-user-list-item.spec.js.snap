@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Github User List Item renders correctly 1`] = `
+<li class="gh-list-item">
+  <div class="gh-list-item__actions"><button data-testid="duplicateButton">Duplicate</button> <button data-testid="removeButton">Remove</button></div>
+  <figure class="gh-list-item__profpic">
+    <div class="gh-list-item__profpic__inner"><img src="https://avatars.githubusercontent.com/u/73375663?v=4" alt="profile picture"></div>
+  </figure>
+  <div>
+    <header>
+      <h3 style="margin: 0px;">RSurya99</h3>
+      <p style="margin: 0px; font-size: 0.8rem;">Bandung, Indonesia</p>
+    </header>
+    <section class="gh-list-item__section-info">
+      <p class="gh-list-item__section-info__item"><span>Public Repos</span> <span>29</span></p>
+      <p class="gh-list-item__section-info__item"><span>Followers</span> <span>38</span></p>
+      <p class="gh-list-item__section-info__item"><span>Following</span> <span>68</span></p>
+    </section>
+    <section class="gh-list-item__section-info">
+      <p class="gh-list-item__section-info__item"><span>Registered at</span> <span>10-24-2020</span></p>
+    </section>
+  </div>
+</li>
+`;
