@@ -3,11 +3,11 @@
     <header style="display: flex; justify-content: space-between">
       <form class="form" @submit.prevent="fetchData">
         <label for="username">
-          <input id="username" type="text" v-model="username" />
+          <input id="username" type="text" v-model="username" data-testid="username-input" />
         </label>
-        <button type="submit">Add</button>
+        <button type="submit" data-testid="btn-submit">Add</button>
       </form>
-      <button type="button">Clear All</button>
+      <button type="button" @click="clearAll" data-testid="btn-clearall">Clear All</button>
     </header>
     <div>
       <GithubUserListItem />
@@ -25,21 +25,11 @@ export default Vue.extend({
   data() {
     return {
       username: '',
-      data: undefined,
+      data: [],
       url: '',
-      userLists: [
-        {
-          username: '',
-          location: '',
-          public_repos: 0,
-          followers: 0,
-          following: 0,
-          created_at: '',
-          avatar_url: '',
-        },
-      ],
     }
   },
+
   methods: {
     composeUrl(username: string): string {
       return `https://api.github.com/users/${username}`
@@ -48,7 +38,11 @@ export default Vue.extend({
     async fetchData(): Promise<void> {
       this.url = this.composeUrl(this.username)
       const response = await fetch(this.url)
-      this.data = await response.json()
+      this.data.push(await response.json())
+    },
+
+    clearAll() {
+      this.data = []
     },
   },
 })
